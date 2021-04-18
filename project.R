@@ -47,11 +47,13 @@ findCorrelation(corMatrix, cutoff = 0.7, names = TRUE)
 # regression
 reg<-lm(sellers_amount~os+popularity+best_price+screen_size+memory_size+battery_size,data)
 summary(reg)
-vif(reg) # only screen size is making trouble here
-
-reg<-lm(sellers_amount~os+popularity+best_price+memory_size+battery_size,data)
-summary(reg)
 vif(reg) 
+
+
+# only screen size is making trouble here -- no longer
+# reg<-lm(sellers_amount~os+popularity+best_price+memory_size+battery_size,data)
+# summary(reg)
+# vif(reg) 
 
 # declare the function
 scale <- function(x){(x - min(x)) / (max(x) - min(x))}
@@ -68,7 +70,7 @@ train_data <- sample_frac(data, replace = FALSE, size = 0.80)
 test_data <- anti_join(data, train_data)
 set.seed(12321)
 # NN stands for neural network
-NN <- neuralnet(sellers_amount~os+popularity+best_price+memory_size+battery_size, data = data)
+NN <- neuralnet(sellers_amount~os+popularity+screen_size+best_price+memory_size+battery_size, data = data)
 plot(NN, rep = 'best')
 
 # Checking the accuracy
