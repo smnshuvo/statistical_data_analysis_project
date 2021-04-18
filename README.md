@@ -51,3 +51,8 @@ library(magrittr) # needs to be run every time you start R and want to use %>%
 library(dplyr)    # alternatively, this also loads %>%
 library(GGally)
 ```
+
+![plot](nn_plot.png)
+
+## RMSE
+```0.12```
