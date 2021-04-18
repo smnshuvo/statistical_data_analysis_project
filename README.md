@@ -1,4 +1,4 @@
-# Predicting mobile price from related data
+# Predicting mobile seller count from related data
 
 ## Workflow
 - Step 1: As of now I don’t know which data I should keep or remove. I will just go by guessing.
