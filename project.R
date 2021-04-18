@@ -38,7 +38,7 @@ data
 ggpairs(data)
 
 print(cor(data[,1:7]))
-ggplot(data, aes(x = popularity , y = best_price)) + geom_point()+stat_smooth(method=lm)
+ggplot(data, aes(x =best_price, y = sellers_amount)) + geom_point()+stat_smooth(method=lm)
 
 corMatrix<-round(cor(data),2)
 corMatrix
@@ -67,5 +67,16 @@ set.seed(12345)
 train_data <- sample_frac(data, replace = FALSE, size = 0.80)
 test_data <- anti_join(data, train_data)
 set.seed(12321)
-NN1 <- neuralnet(sellers_amount~os+popularity+best_price+memory_size+battery_size, data = data)
-plot(NN1, rep = 'best')
+# NN stands for neural network
+NN <- neuralnet(sellers_amount~os+popularity+best_price+memory_size+battery_size, data = data)
+plot(NN, rep = 'best')
+
+# Checking the accuracy
+test_nn_output <- compute(NN, test_data[, 1:7])$net.result
+NN_test_RMSE <- rmse(test_nn_output, test_data[,4])
+NN_test_RMSE # showing a good model
+
+# Finding the sum of square error
+test_reg_output <- predict(reg, test_data)
+reg_test_SSE <- sum((test_reg_output - test_data[,4])^2)/2
+reg_test_SSE
