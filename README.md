@@ -36,3 +36,18 @@ There are
 
 - Step 6: Filled the missing screen size from Google search
 The ```final_data.csv``` is the data on which we will be working on.
+
+# Coding
+
+## Library Used
+```R
+library(tidyverse)
+library(ggplot2)
+library(caret)
+library(car)
+library(neuralnet)
+library(Metrics)
+library(magrittr) # needs to be run every time you start R and want to use %>%
+library(dplyr)    # alternatively, this also loads %>%
+library(GGally)
+```
