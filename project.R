@@ -45,11 +45,11 @@ corMatrix
 # finding correlation
 findCorrelation(corMatrix, cutoff = 0.7, names = TRUE)
 # regression
-reg<-lm(best_price~os+popularity+sellers_amount+screen_size+memory_size+battery_size,data)
+reg<-lm(sellers_amount~os+popularity+best_price+screen_size+memory_size+battery_size,data)
 summary(reg)
 vif(reg) # only screen size is making trouble here
 
-reg<-lm(best_price~os+popularity+sellers_amount+memory_size+battery_size,data)
+reg<-lm(sellers_amount~os+popularity+best_price+memory_size+battery_size,data)
 summary(reg)
 vif(reg) 
 
@@ -60,8 +60,12 @@ data <- data %>%
   mutate_all(scale)
 set.seed(12345)
 
+#___________________
+# Creating a Model
+#___________________
+
 train_data <- sample_frac(data, replace = FALSE, size = 0.80)
 test_data <- anti_join(data, train_data)
 set.seed(12321)
-NN1 <- neuralnet(best_price~os+popularity+sellers_amount+memory_size, data = data)
+NN1 <- neuralnet(sellers_amount~os+popularity+best_price+memory_size+battery_size, data = data)
 plot(NN1, rep = 'best')
